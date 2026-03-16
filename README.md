@@ -1,39 +1,152 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Flutter ShowcaseBar
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+A lightweight Flutter package to create **feature highlights and onboarding walkthroughs** in your app.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
+`flutter_showcasebar` helps you guide users through important UI elements by displaying a **dark overlay with tooltips** explaining each feature.
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+---
 
-## Features
+## ✨ Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+* Highlight important widgets
+* Dark background overlay
+* Tooltip with title and description
+* Next and Skip buttons
+* Multi-step walkthrough support
+* Lightweight and easy to use
+* Simple integration
 
-## Getting started
+---
+## Preview
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
 
-## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+## 📦 Installation
 
-```dart
-const like = 'sample';
+Add the dependency in your `pubspec.yaml`.
+
+```yaml
+dependencies:
+  flutter_showcasebar:
+    git:
+      url: https://github.com/jaypanchal1014/flutter_showcasebar.git
 ```
 
-## Additional information
+Then run:
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```
+flutter pub get
+```
+
+---
+
+## 📁 Folder Structure
+
+```
+flutter_showcasebar/
+│
+├── lib/
+│   ├── flutter_showcasebar.dart
+│   │
+│   └── src/
+│       ├── controller.dart
+│       ├── model.dart
+│       ├── overlay.dart
+│       └── widget.dart
+│
+├── example/
+│   └── lib/
+│       └── main.dart
+│
+├── pubspec.yaml
+└── README.md
+```
+
+---
+
+## 🚀 Usage
+
+Import the package:
+
+```dart
+import 'package:flutter_showcasebar/flutter_showcasebar.dart';
+```
+
+---
+
+## 🧩 Basic Example
+
+### 1️⃣ Create Controller and Key
+
+```dart
+final ShowcaseController controller = ShowcaseController();
+final GlobalKey buttonKey = GlobalKey();
+```
+
+---
+
+### 2️⃣ Wrap Your Screen with Showcase
+
+```dart
+@override
+Widget build(BuildContext context) {
+  return MaterialApp(
+    home: Showcase(
+      controller: controller,
+      child: HomeScreen(
+        controller: controller,
+        buttonKey: buttonKey,
+      ),
+    ),
+  );
+}
+```
+
+---
+
+### 3️⃣ Start Showcase
+
+```dart
+@override
+void initState() {
+  super.initState();
+
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    widget.controller.start([
+      ShowcaseStep(
+        key: widget.buttonKey,
+        title: "Add Item",
+        description: "Tap here to add a new item",
+      ),
+    ]);
+  });
+}
+```
+
+---
+
+### 4️⃣ Attach Key to Widget
+
+```dart
+FloatingActionButton(
+  key: buttonKey,
+  onPressed: () {},
+  child: Icon(Icons.add),
+)
+```
+
+---
+
+## 📱 How it Works
+
+When the showcase starts:
+
+1. The screen becomes dark with an overlay.
+2. A tooltip appears explaining the highlighted feature.
+3. Users can tap **Next** to continue or **Skip** to close the walkthrough.
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
