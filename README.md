@@ -17,8 +17,9 @@ A lightweight Flutter package to create **feature highlights and onboarding walk
 * Simple integration
 
 ---
-## Preview
+## 🎥 Demo Video
 
+[Watch Demo](https://github.com/jaypanchal1014/showcasebar/blob/stage/1000019582.mp4)
 
 
 ## 📦 Installation
